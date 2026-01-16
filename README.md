@@ -23,6 +23,23 @@ ResilientTask is a distributed system built to handle intensive asynchronous wor
 *   **Workers**: Async Python consumers with smart-sleep cancellation logic.
 *   **Infrastructure**: Docker Compose, Nginx Load Balancer.
 
+## 🧠 Core Implementation Details
+
+### 1. High-Availability & Reliability
+- **XAUTOCLAIM Consumer Group**: We use Redis Streams with an optimized `XAUTOCLAIM` idle time (30 minutes). This ensures that if a worker crashes, another worker can eventually "claim" the task, but it prevents active long-running tasks from being "stolen" by other workers while they are still processing.
+- **Smart Cancellation**: Workers utilize an asynchronous "Smart Sleep" mechanism that checks the database for `is_cancelled` flags at frequent intervals (1s), allowing for graceful termination of long-running workloads.
+
+### 2. Resource Management & Quotas
+- **Backend Enforcement**: Every task dispatch is validated against the user's `task_quota` stored in PostgreSQL. Batch dispatches (replicas) are tracked atomically to prevent over-allocation.
+- **Dynamic Visualization**: The frontend's "Resource Command Deck" polls usage every 5 seconds, calculating "Usage Velocity" and displaying a real-time SVG pulse of system activity.
+
+### 3. Real-Time Experience
+- **Optimistic UI Updates**: Task replicas are injected into the local frontend state immediately upon submission, providing instant feedback while the backend processes the batch.
+- **Asynchronous Polling**: A 5-second delta-sync strategy keeps the global task feed and metrics updated without overwhelming the API gateway.
+
+### 4. Administrative Oversight
+- **Global Protocol Reset**: Admins have access to a "Protocol Format" tool that uses SQL `TRUNCATE` with identity resets. This provides a clean slate by clearing all task records and resetting ID sequences system-wide.
+
 ## 🚦 Getting Started
 
 ### Prerequisites
