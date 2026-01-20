@@ -610,9 +610,13 @@ export default function Home() {
                             <span className="text-xs font-mono text-indigo-400 font-bold">{duration}s</span>
                           </div>
                           <input
-                            type="range" min="1" max="900" value={duration}
-                            onChange={(e) => setDuration(parseInt(e.target.value))}
-                            className="w-full h-1.5 bg-indigo-500/20 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                            type="number" min="1" max="900" value={duration}
+                            onChange={(e) => {
+                              const val = parseInt(e.target.value);
+                              if (isNaN(val)) setDuration(1);
+                              else setDuration(Math.max(1, Math.min(900, val)));
+                            }}
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
                           />
                         </div>
                         <div>
@@ -621,9 +625,13 @@ export default function Home() {
                             <span className="text-xs font-mono text-indigo-400 font-bold">{replicas}x</span>
                           </div>
                           <input
-                            type="range" min="1" max="100" value={replicas}
-                            onChange={(e) => setReplicas(parseInt(e.target.value))}
-                            className="w-full h-1.5 bg-indigo-500/20 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                            type="number" min="1" max="100" value={replicas}
+                            onChange={(e) => {
+                              const val = parseInt(e.target.value);
+                              if (isNaN(val)) setReplicas(1);
+                              else setReplicas(Math.max(1, Math.min(100, val)));
+                            }}
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
                           />
                         </div>
                         <div>
@@ -632,9 +640,13 @@ export default function Home() {
                             <span className="text-xs font-mono text-indigo-400 font-bold">{maxTime}s</span>
                           </div>
                           <input
-                            type="range" min="10" max="900" value={maxTime}
-                            onChange={(e) => setMaxTime(parseInt(e.target.value))}
-                            className="w-full h-1.5 bg-indigo-500/20 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                            type="number" min="10" max="900" value={maxTime}
+                            onChange={(e) => {
+                              const val = parseInt(e.target.value);
+                              if (isNaN(val)) setMaxTime(10);
+                              else setMaxTime(Math.max(10, Math.min(900, val)));
+                            }}
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
                           />
                         </div>
                         <div>
