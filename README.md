@@ -6,6 +6,12 @@ A production-grade distributed task orchestrator designed for high-availability 
 
 ResilientTask is a distributed system built to handle intensive asynchronous workloads with zero-latency feedback. It features a sophisticated Next.js dashboard, a FastAPI gateway, and a scalable pool of Python workers coordinated via Redis Streams and PostgreSQL.
 
+## 📊 System Architecture
+
+![Client-Server Architecture Diagram 1](client%20server%20systems%20(3).jpg)
+
+![Client-Server Architecture Diagram 2](client%20server%20systems%20(4).jpg)
+
 ## 🏗️ Architectural Pillars
 
 The ResilientTask Orchestrator is engineered to satisfy the rigorous demands of enterprise-grade distributed systems.

@@ -609,45 +609,117 @@ export default function Home() {
                             <label className="text-[10px] uppercase font-bold text-gray-500">Simulated Workload (sec)</label>
                             <span className="text-xs font-mono text-indigo-400 font-bold">{duration}s</span>
                           </div>
-                          <input
-                            type="number" min="1" max="900" value={duration}
-                            onChange={(e) => {
-                              const val = parseInt(e.target.value);
-                              if (isNaN(val)) setDuration(1);
-                              else setDuration(Math.max(1, Math.min(900, val)));
-                            }}
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
-                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={duration}
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/[^0-9]/g, '');
+                                if (val === '') {
+                                  setDuration(1);
+                                } else {
+                                  const num = parseInt(val);
+                                  setDuration(Math.max(1, Math.min(900, num)));
+                                }
+                              }}
+                              placeholder="1-900"
+                              className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
+                            />
+                            <div className="flex flex-col gap-1">
+                              <button
+                                type="button"
+                                onClick={() => setDuration(Math.min(900, duration + 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▲
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setDuration(Math.max(1, duration - 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▼
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div>
                           <div className="flex justify-between mb-2">
                             <label className="text-[10px] uppercase font-bold text-gray-500">Task Replicas (Batch)</label>
                             <span className="text-xs font-mono text-indigo-400 font-bold">{replicas}x</span>
                           </div>
-                          <input
-                            type="number" min="1" max="100" value={replicas}
-                            onChange={(e) => {
-                              const val = parseInt(e.target.value);
-                              if (isNaN(val)) setReplicas(1);
-                              else setReplicas(Math.max(1, Math.min(100, val)));
-                            }}
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
-                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={replicas}
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/[^0-9]/g, '');
+                                if (val === '') {
+                                  setReplicas(1);
+                                } else {
+                                  const num = parseInt(val);
+                                  setReplicas(Math.max(1, Math.min(100, num)));
+                                }
+                              }}
+                              placeholder="1-100"
+                              className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
+                            />
+                            <div className="flex flex-col gap-1">
+                              <button
+                                type="button"
+                                onClick={() => setReplicas(Math.min(100, replicas + 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▲
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setReplicas(Math.max(1, replicas - 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▼
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div>
                           <div className="flex justify-between mb-2">
                             <label className="text-[10px] uppercase font-bold text-gray-500">Max Allowed Time (Timeout)</label>
                             <span className="text-xs font-mono text-indigo-400 font-bold">{maxTime}s</span>
                           </div>
-                          <input
-                            type="number" min="10" max="900" value={maxTime}
-                            onChange={(e) => {
-                              const val = parseInt(e.target.value);
-                              if (isNaN(val)) setMaxTime(10);
-                              else setMaxTime(Math.max(10, Math.min(900, val)));
-                            }}
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
-                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={maxTime}
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/[^0-9]/g, '');
+                                if (val === '') {
+                                  setMaxTime(10);
+                                } else {
+                                  const num = parseInt(val);
+                                  setMaxTime(Math.max(10, Math.min(900, num)));
+                                }
+                              }}
+                              placeholder="10-900"
+                              className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm font-mono text-indigo-400 outline-none focus:border-indigo-500/50 transition-all"
+                            />
+                            <div className="flex flex-col gap-1">
+                              <button
+                                type="button"
+                                onClick={() => setMaxTime(Math.min(900, maxTime + 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▲
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setMaxTime(Math.max(10, maxTime - 1))}
+                                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition text-xs"
+                              >
+                                ▼
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div>
                           <label className="block text-[10px] uppercase font-bold text-gray-500 mb-2">Input Instructions</label>
